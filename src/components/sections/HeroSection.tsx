@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Compass, ShieldCheck, Terminal, Award } from 'lucide-react';
+import { ScrambleText } from '../ui/ScrambleText';
 
 export const HeroSection: React.FC = () => {
   const scrollTo = (id: string) => {
@@ -12,16 +13,16 @@ export const HeroSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           {/* Institutional Top Label */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yousec-surface/80 border border-yousec-border text-xs font-mono tracking-wider text-yousec-muted mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yousec-surface/90 border border-yousec-border text-xs font-mono tracking-wider text-yousec-muted mb-6 shadow-sm hover:border-yousec-accent/50 transition-colors">
             <span className="w-1.5 h-1.5 rounded-full bg-yousec-accent animate-pulse" />
-            <span>YOUCODE SAFI • CYBERSECURITY COMMUNITY</span>
+            <ScrambleText text="YOUCODE SAFI • CYBERSECURITY COMMUNITY" autoStart delay={100} triggerOnHover />
           </div>
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white leading-[1.1] mb-6">
             YOUR JOURNEY INTO{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yousec-text via-white to-yousec-accent">
-              CYBERSECURITY
+              <ScrambleText text="CYBERSECURITY" autoStart delay={400} triggerOnHover />
             </span>{' '}
             STARTS HERE.
           </h1>

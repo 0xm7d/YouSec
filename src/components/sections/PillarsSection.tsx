@@ -1,5 +1,7 @@
 import React from 'react';
 import { BookOpen, Cpu, Users, Trophy } from 'lucide-react';
+import { SpotlightCard } from '../ui/SpotlightCard';
+import { ScrambleText } from '../ui/ScrambleText';
 
 const PILLARS = [
   {
@@ -46,7 +48,7 @@ export const PillarsSection: React.FC = () => {
             01 — Core Pillars
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight mb-4">
-            Why Join YouSec?
+            <ScrambleText text="Why Join YouSec?" triggerOnHover autoStart delay={100} />
           </h2>
           <p className="text-sm sm:text-base text-yousec-muted leading-relaxed">
             Cybersecurity is learned through curiosity, experimentation, practical challenges, and continuous improvement. Here is how we grow together.
@@ -58,23 +60,25 @@ export const PillarsSection: React.FC = () => {
           {PILLARS.map((p) => {
             const Icon = p.icon;
             return (
-              <div
+              <SpotlightCard
                 key={p.number}
-                className="group relative bg-yousec-surface border border-yousec-border rounded-xl p-6 flex flex-col justify-between card-hover-crimson"
+                className="flex flex-col justify-between"
+                spotlightColor="rgba(225, 29, 72, 0.16)"
+                borderColor="rgba(225, 29, 72, 0.75)"
               >
                 {/* Number & Icon header */}
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <span className="font-mono text-xs font-bold px-2 py-1 rounded bg-black/40 border border-yousec-border text-yousec-accent">
+                    <span className="font-mono text-xs font-bold px-2 py-1 rounded bg-black/50 border border-yousec-border text-yousec-accent group-hover:border-yousec-accent/50 group-hover:shadow-glow-subtle transition-all duration-300">
                       {p.number}
                     </span>
-                    <div className="p-2.5 rounded-lg bg-yousec-card border border-yousec-border group-hover:border-yousec-accent/40 group-hover:text-yousec-accent text-yousec-muted transition-colors">
+                    <div className="p-2.5 rounded-lg bg-yousec-card border border-yousec-border group-hover:border-yousec-accent/50 group-hover:text-yousec-accent text-yousec-muted transition-colors">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <h3 className="font-display font-bold text-xl text-white mb-1">
-                    {p.title}
+                  <h3 className="font-display font-bold text-xl text-white mb-1 group-hover:text-yousec-accent transition-colors">
+                    <ScrambleText text={p.title} triggerOnHover autoStart={false} />
                   </h3>
                   <div className="text-[11px] font-mono text-yousec-dimmed uppercase tracking-wider mb-3">
                     {p.subtitle}
@@ -96,7 +100,7 @@ export const PillarsSection: React.FC = () => {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </SpotlightCard>
             );
           })}
         </div>
