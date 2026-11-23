@@ -1,7 +1,7 @@
 import emailjs from '@emailjs/browser';
 import { ApplicationRecord } from '../types/application';
 
-export const ADMIN_EMAIL = 'mohamedbriti01@gmail.com';
+export const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || 'staff@yousec.club';
 
 interface EmailSendResult {
   success: boolean;
@@ -20,7 +20,7 @@ export async function sendApplicationNotificationEmail(record: ApplicationRecord
     admin_email: ADMIN_EMAIL,
     applicant_name: record.fullName,
     applicant_email: record.email,
-    campus: record.campus,
+    campus: record.campus || 'YouCode Safi',
     academic_year: record.academicYear,
     discord_username: record.discordUsername || 'N/A',
     experience_level: record.experienceLevel,
@@ -42,7 +42,7 @@ export async function sendApplicationNotificationEmail(record: ApplicationRecord
       await emailjs.send(serviceId, templateId, emailParams, publicKey);
       return {
         success: true,
-        message: `Application notification delivered to ${ADMIN_EMAIL} via EmailJS.`,
+        message: 'Application notification delivered to club staff via EmailJS.',
         provider: 'emailjs',
       };
     } catch (err: unknown) {
@@ -61,7 +61,7 @@ export async function sendApplicationNotificationEmail(record: ApplicationRecord
       if (resp.ok) {
         return {
           success: true,
-          message: `Application dispatched to webhook destination for ${ADMIN_EMAIL}.`,
+          message: 'Application dispatched to webhook destination for club staff.',
           provider: 'webhook',
         };
       }
@@ -73,7 +73,7 @@ export async function sendApplicationNotificationEmail(record: ApplicationRecord
   // 3. Graceful fallback when API keys are pending setup
   return {
     success: true,
-    message: `Application recorded for review by ${ADMIN_EMAIL}.`,
+    message: 'Application recorded for review by YouSec staff.',
     provider: 'local_fallback',
   };
 }
@@ -91,7 +91,7 @@ Submitted At: ${record.submittedAt}
 --- 01. APPLICANT INFO ---
 Name: ${record.fullName}
 Email: ${record.email}
-Campus: ${record.campus}
+Campus: ${record.campus || 'YouCode Safi'}
 Academic Year: ${record.academicYear}
 Discord: ${record.discordUsername || 'N/A'}
 
@@ -116,7 +116,7 @@ ${record.contribution || 'N/A'}
 
 ---
 Status: PENDING REVIEW
-Reviewer: ${ADMIN_EMAIL}
+Reviewer: YouSec Club Staff
 `);
 
   return `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;

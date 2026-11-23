@@ -4,7 +4,7 @@
 
 Official membership application website for **YouSec**, the Cybersecurity & Ethical Hacking Club at **YouCode Safi, Morocco**.
 
-Inspired by modern community design, built with a dark-first cybersecurity visual identity (#090909 background, #DC2626 crimson red accent, #F5F5F5 text), polished typography (Inter, Space Grotesk, JetBrains Mono), and an intuitive 4-step membership application process.
+Built with a modern dark-first cybersecurity visual identity (#090909 background, #DC2626 crimson red accent, #F5F5F5 text), polished typography (Inter, Space Grotesk, JetBrains Mono), and an intuitive 4-step membership application process.
 
 ---
 
@@ -23,7 +23,7 @@ Inspired by modern community design, built with a dark-first cybersecurity visua
    - **03 — Ethics & Values:** Inclusivity (welcomes beginners to advanced), responsible disclosure, and community accountability.
 
 3. **Multi-Step Membership Application Form:**
-   - **Step 1 — Personal Information:** Full name, email address, campus (Safi / Youssoufia), academic year / track, discord username.
+   - **Step 1 — Personal Information:** Full name, email address, academic track (**1ère Année** / **2ème Année**), and optional discord username (Campus is automatically preset to YouCode Safi).
    - **Step 2 — Cybersecurity Background:** Experience level (Complete Beginner, Beginner, Intermediate, Advanced), areas of interest multi-selector, prior lab/CTF participation toggle and details.
    - **Step 3 — Motivation & Mindset:** Long-form responses with real-time character counters and minimum thresholds.
    - **Step 4 — Review & Consent:** Full dossier review card with instant section editing, and 3 mandatory ethical checkboxes (Code of Conduct, Authorized Security Pledge, Data Processing Notice).
@@ -31,7 +31,7 @@ Inspired by modern community design, built with a dark-first cybersecurity visua
 4. **Dedicated Requirements Implemented:**
    - **Single Submission Constraint:** Each applicant email address is restricted to exactly **one submission** (enforced both via frontend validation and database-level `UNIQUE (email)` constraint).
    - **Dossier Export (.DOC / Word):** Applicants and club managers can instantly download a formatted Microsoft Word-compatible dossier (`.doc`) containing the complete application answers and metadata.
-   - **Email Notification to `mohamedbriti01@gmail.com`:** Integrated delivery via EmailJS / Webhook to alert the club coordinator for each incoming candidate.
+   - **Staff Notifications:** Automated email notifications dispatched to the club coordinator team via EmailJS / Webhook for each incoming candidate.
    - **Autosave & Draft Persistence:** Seamless browser storage saves user progress in real-time with an autosave badge and reset option.
 
 ---
@@ -51,7 +51,8 @@ Inspired by modern community design, built with a dark-first cybersecurity visua
 
 ### 1. Clone or Open Workspace
 ```bash
-cd "c:\Users\Underrated\OneDrive\Bureau\hiba"
+git clone https://github.com/0xm7d/YouSec.git
+cd YouSec
 ```
 
 ### 2. Install Dependencies
@@ -71,10 +72,11 @@ Configure your credentials in `.env`:
 VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=your-anon-public-key
 
-# EmailJS Configuration (Destination: mohamedbriti01@gmail.com)
+# EmailJS Configuration (Destination)
 VITE_EMAILJS_SERVICE_ID=service_yousec
 VITE_EMAILJS_TEMPLATE_ID=template_yousec_app
 VITE_EMAILJS_PUBLIC_KEY=your_public_key
+VITE_ADMIN_EMAIL=staff@yousec.club
 ```
 *(Note: If environment variables are omitted during local preview, the app runs in full offline demo mode with local storage persistence and Word doc generation).*
 
@@ -116,6 +118,7 @@ npm run build
    - `VITE_EMAILJS_SERVICE_ID`
    - `VITE_EMAILJS_TEMPLATE_ID`
    - `VITE_EMAILJS_PUBLIC_KEY`
+   - `VITE_ADMIN_EMAIL`
 7. Click **Deploy**. Your site will be live on Vercel with high performance and global CDN edge caching.
 
 ---
@@ -124,4 +127,4 @@ npm run build
 
 - **Motto:** *"Learn Freely. Hack Ethically. Respect Everyone."*
 - **Institution:** YouCode Safi, Morocco
-- **Contact & Applications Reviewer:** `mohamedbriti01@gmail.com`
+- **Contact:** YouSec Club Staff

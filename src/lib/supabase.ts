@@ -83,7 +83,7 @@ export async function checkEmailSubmissionStatus(email: string): Promise<{
  * Submits an application dossier:
  * 1. Verifies unique email constraint
  * 2. Saves to Supabase (if configured) or local storage
- * 3. Triggers email notification to mohamedbriti01@gmail.com
+ * 3. Triggers email notification to designated club staff
  */
 export async function submitApplication(
   formData: Omit<ApplicationRecord, 'referenceId' | 'status' | 'submittedAt'>
@@ -168,7 +168,7 @@ export async function submitApplication(
   // Also save locally so applicant can review or download later
   recordLocalSubmission(fullRecord);
 
-  // Dispatch email notification to mohamedbriti01@gmail.com
+  // Dispatch email notification to club staff
   const emailRes = await sendApplicationNotificationEmail(fullRecord);
 
   return {
