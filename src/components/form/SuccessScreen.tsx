@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import confetti from 'canvas-confetti';
 import { 
-  CheckCircle2, 
   Copy, 
   Check, 
-  Download, 
   RotateCcw,
   Clock,
-  ShieldCheck,
-  FileCheck
+  ShieldCheck
 } from 'lucide-react';
 import { ApplicationRecord } from '../../types/application';
-import { downloadApplicationDoc } from '../../lib/storage';
+import { HackerBadge } from '../ui/HackerBadge';
 
 interface SuccessScreenProps {
   record: ApplicationRecord;
@@ -41,48 +38,56 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ record, onReset })
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownloadDoc = () => {
-    downloadApplicationDoc(record);
-  };
-
   return (
     <div className="py-6 space-y-8 step-fade-enter text-center max-w-xl mx-auto">
-      {/* Icon badge */}
-      <div className="relative inline-flex items-center justify-center">
-        <div className="w-16 h-16 rounded-full bg-yousec-accent/15 border border-yousec-accent/30 flex items-center justify-center text-yousec-accent shadow-glow-subtle">
-          <CheckCircle2 className="w-8 h-8" />
-        </div>
+      {/* 3D Hacker Operative Badge */}
+      <div className="flex justify-center mb-6">
+        <HackerBadge
+          data={record}
+          referenceId={record.referenceId}
+          isSubmitted={true}
+        />
       </div>
 
       {/* Main headings */}
       <div className="space-y-2">
-        <div className="inline-block px-2.5 py-1 rounded bg-black/60 border border-yousec-border text-[11px] font-mono text-yousec-dimmed">
-          STATUS: PENDING REVIEW
+        <div className="inline-block px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-400 font-semibold tracking-wider">
+          STATUS: APPLICATION LOGGED & QUEUED
         </div>
         <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white tracking-tight">
-          APPLICATION RECEIVED.
+          APPLICATION TRANSMITTED.
         </h3>
         <p className="text-xs sm:text-sm text-yousec-muted leading-relaxed max-w-md mx-auto">
-          Thank you for applying to <span className="text-white font-medium">YouSec</span>. Your application has been logged and queued for review by the committee.
+          Welcome to the recruitment queue, <span className="text-white font-medium">{record.fullName}</span>. Your dossier has been securely logged with the YouSec committee.
         </p>
       </div>
 
       {/* Reference Card */}
-      <div className="p-4 rounded-xl bg-yousec-surface border border-yousec-border space-y-3 text-left">
+      <div className="p-4 rounded-xl bg-yousec-surface border border-yousec-border space-y-3 text-left shadow-card">
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-mono uppercase tracking-wider text-yousec-dimmed">
             Application Reference Code:
           </span>
           <button
+            type="button"
             onClick={copyReference}
-            className="flex items-center gap-1 text-[11px] font-mono text-yousec-muted hover:text-white transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/40 border border-yousec-border text-[11px] font-mono text-yousec-muted hover:text-white hover:border-yousec-accent transition-colors"
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
-            <span>{copied ? 'Copied' : 'Copy'}</span>
+            {copied ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-emerald-400">Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5" />
+                <span>Copy</span>
+              </>
+            )}
           </button>
         </div>
 
-        <div className="p-3 rounded-lg bg-black/60 border border-yousec-border flex items-center justify-between">
+        <div className="p-3.5 rounded-lg bg-black/60 border border-yousec-border flex items-center justify-between">
           <span className="font-mono text-base sm:text-lg font-bold text-yousec-accent tracking-widest">
             {record.referenceId}
           </span>
@@ -97,28 +102,6 @@ export const SuccessScreen: React.FC<SuccessScreenProps> = ({ record, onReset })
             Notification dispatched to <strong className="text-white">YouSec Club Staff</strong>. Single-submission registered for <span className="text-white">{record.email}</span>.
           </span>
         </div>
-      </div>
-
-      {/* Word / Document Download Action */}
-      <div className="p-4 rounded-xl bg-yousec-card/70 border border-yousec-border text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div className="flex items-start gap-3">
-          <div className="p-2 rounded-lg bg-yousec-bg border border-yousec-border text-yousec-accent shrink-0">
-            <FileCheck className="w-5 h-5" />
-          </div>
-          <div>
-            <div className="text-xs font-bold text-white">Download Application Dossier</div>
-            <div className="text-[11px] text-yousec-muted">
-              Save a Word-compatible (.doc) copy of your submitted answers.
-            </div>
-          </div>
-        </div>
-        <button
-          onClick={handleDownloadDoc}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-yousec-surface hover:bg-yousec-bg border border-yousec-border text-xs font-semibold text-white transition-colors shrink-0"
-        >
-          <Download className="w-3.5 h-3.5" />
-          <span>Export .DOC</span>
-        </button>
       </div>
 
       {/* Next Steps Timeline */}
