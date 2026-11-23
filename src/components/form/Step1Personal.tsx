@@ -121,7 +121,7 @@ export const Step1Personal: React.FC<Step1PersonalProps> = ({
         {/* Discord Username */}
         <div>
           <label className="block text-xs font-mono uppercase tracking-wider text-yousec-text mb-2">
-            Discord Username <span className="text-yousec-dimmed font-normal lowercase">(optional)</span>
+            Discord Username <span className="text-yousec-accent">*</span>
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-yousec-dimmed">
@@ -132,7 +132,11 @@ export const Step1Personal: React.FC<Step1PersonalProps> = ({
               value={data.discordUsername}
               onChange={(e) => onChange({ discordUsername: e.target.value })}
               placeholder="e.g. yassine#1337 or yassine_sec"
-              className="w-full pl-10 pr-4 py-2.5 bg-yousec-bg border border-yousec-border rounded-xl text-sm text-white placeholder-yousec-dimmed focus:outline-none focus:border-yousec-accent/80 transition-colors"
+              className={`w-full pl-10 pr-4 py-2.5 bg-yousec-bg border rounded-xl text-sm text-white placeholder-yousec-dimmed focus:outline-none transition-colors ${
+                errors.discordUsername
+                  ? 'border-yousec-accent focus:ring-1 focus:ring-yousec-accent'
+                  : 'border-yousec-border focus:border-yousec-accent/80'
+              }`}
             />
           </div>
           {errors.discordUsername && (

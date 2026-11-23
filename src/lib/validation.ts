@@ -44,7 +44,10 @@ export function validateStep0(data: ApplicationFormData): FormValidationErrors {
     errors.academicYear = 'Please select your current academic year or track.';
   }
 
-  if (data.discordUsername && data.discordUsername.length > FIELD_LIMITS.discordUsername) {
+  const discord = cleanString(data.discordUsername, FIELD_LIMITS.discordUsername);
+  if (!discord || discord.length < 2) {
+    errors.discordUsername = 'Discord username is required. Please provide your Discord handle.';
+  } else if (discord.length > FIELD_LIMITS.discordUsername) {
     errors.discordUsername = `Discord username must be under ${FIELD_LIMITS.discordUsername} characters.`;
   }
 
