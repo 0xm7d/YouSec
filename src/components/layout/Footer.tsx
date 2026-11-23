@@ -14,11 +14,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeOfConduct, onOpenPriva
           {/* Brand info */}
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-3">
-              <img
-                src="/yousec-logo.png"
-                alt="YouSec Logo"
-                className="w-8 h-8 rounded-full border border-yousec-border"
-              />
+              <div className="w-9 h-9 rounded-lg border border-yousec-border bg-yousec-surface flex items-center justify-center p-1">
+                <img
+                  src="/yousec-logo.png"
+                  alt="YouSec Logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
               <span className="font-display font-bold text-lg tracking-wider text-yousec-text">
                 YOUSEC
               </span>
