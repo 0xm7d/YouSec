@@ -15,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCodeOfConduct, onOpenPriva
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-3">
               <img
-                src="/yousec-logo.jpg"
+                src="/yousec-logo.png"
                 alt="YouSec Logo"
                 className="w-8 h-8 rounded-full border border-yousec-border"
               />

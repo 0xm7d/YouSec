@@ -36,7 +36,7 @@ export const Navbar: React.FC = () => {
             <a href="#" className="flex items-center gap-3 group">
               <div className="relative w-10 h-10 rounded-full overflow-hidden border border-yousec-border bg-black group-hover:border-yousec-accent transition-colors">
                 <img
-                  src="/yousec-logo.jpg"
+                  src="/yousec-logo.png"
                   alt="YouSec Club Logo"
                   className="w-full h-full object-cover rounded-full"
                 />

@@ -1,17 +1,17 @@
 # YouSec — YouCode Cybersecurity Club Website & Membership Platform
 
-![YouSec Logo](/public/yousec-logo.jpg)
+![YouSec Logo](/public/yousec-logo.png)
 
 Official membership application website for **YouSec**, the Cybersecurity & Ethical Hacking Club at **YouCode Safi, Morocco**.
 
-Built with a modern dark-first cybersecurity visual identity (#090909 background, #DC2626 crimson red accent, #F5F5F5 text), polished typography (Inter, Space Grotesk, JetBrains Mono), and an intuitive 4-step membership application process.
+Built with a modern dark-first cybersecurity visual identity (#090909 background, #DC2626 crimson red accent, #F5F5F5 text), transparent logo badge, polished typography (Inter, Space Grotesk, JetBrains Mono), and an intuitive 4-step membership application process.
 
 ---
 
 ## 🌟 Key Features
 
 1. **Official Branding & Identity:**
-   - Official YouSec circular emblem badge.
+   - Official YouSec circular emblem badge (transparent background).
    - Institutional identification (`YOUCODE SAFI • MOROCCO`).
    - Club motto: *"Learn Freely. Hack Ethically. Respect Everyone."*
    - Cyber ambient grid background with subtle crimson glow and terminal coordinate markers (`+`).
@@ -25,13 +25,15 @@ Built with a modern dark-first cybersecurity visual identity (#090909 background
 3. **Multi-Step Membership Application Form:**
    - **Step 1 — Personal Information:** Full name, email address, academic track (**1ère Année** / **2ème Année**), and optional discord username (Campus is automatically preset to YouCode Safi).
    - **Step 2 — Cybersecurity Background:** Experience level (Complete Beginner, Beginner, Intermediate, Advanced), areas of interest multi-selector, prior lab/CTF participation toggle and details.
-   - **Step 3 — Motivation & Mindset:** Long-form responses with real-time character counters and minimum thresholds.
+   - **Step 3 — Motivation & Mindset (Dynamic Validation):** 
+     - **For Complete Beginners & Beginners:** Questions are **optional** to encourage participation without intimidation.
+     - **For Intermediate & Advanced:** Questions are **required** (minimum 20 characters) to understand prior knowledge and technical goals.
    - **Step 4 — Review & Consent:** Full dossier review card with instant section editing, and 3 mandatory ethical checkboxes (Code of Conduct, Authorized Security Pledge, Data Processing Notice).
 
-4. **Dedicated Requirements Implemented:**
-   - **Single Submission Constraint:** Each applicant email address is restricted to exactly **one submission** (enforced both via frontend validation and database-level `UNIQUE (email)` constraint).
+4. **Standalone Email-Driven Workflow (No Database Required):**
+   - Submissions are delivered directly to the club staff's email via EmailJS / Webhook.
+   - **Single Submission Constraint:** Each applicant email address is restricted to exactly **one submission** (enforced in browser storage).
    - **Dossier Export (.DOC / Word):** Applicants and club managers can instantly download a formatted Microsoft Word-compatible dossier (`.doc`) containing the complete application answers and metadata.
-   - **Staff Notifications:** Automated email notifications dispatched to the club coordinator team via EmailJS / Webhook for each incoming candidate.
    - **Autosave & Draft Persistence:** Seamless browser storage saves user progress in real-time with an autosave badge and reset option.
 
 ---
@@ -42,8 +44,7 @@ Built with a modern dark-first cybersecurity visual identity (#090909 background
 - **Styling:** Tailwind CSS + PostCSS + Autoprefixer
 - **Icons:** Lucide React
 - **Celebration:** Canvas-Confetti
-- **Database Backend:** Supabase (PostgreSQL with Row Level Security)
-- **Notification Services:** EmailJS / Webhook integration
+- **Delivery Services:** EmailJS / Webhooks (No external database required)
 
 ---
 
@@ -60,25 +61,21 @@ cd YouSec
 npm install
 ```
 
-### 3. Configure Environment Variables
+### 3. Configure Environment Variables (Optional)
 Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
 
-Configure your credentials in `.env`:
+Configure your email settings in `.env`:
 ```env
-# Supabase Configuration
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-public-key
-
-# EmailJS Configuration (Destination)
+# EmailJS Configuration
 VITE_EMAILJS_SERVICE_ID=service_yousec
 VITE_EMAILJS_TEMPLATE_ID=template_yousec_app
 VITE_EMAILJS_PUBLIC_KEY=your_public_key
 VITE_ADMIN_EMAIL=staff@yousec.club
 ```
-*(Note: If environment variables are omitted during local preview, the app runs in full offline demo mode with local storage persistence and Word doc generation).*
+*(Note: If environment variables are omitted during preview, the app runs in full offline demo mode with local storage persistence and Word doc generation).*
 
 ### 4. Run Development Server
 ```bash
@@ -93,18 +90,6 @@ npm run build
 
 ---
 
-## 🗄️ Database Setup (Supabase)
-
-1. Create a free project at [supabase.com](https://supabase.com).
-2. Go to the **SQL Editor** in your Supabase dashboard.
-3. Open `supabase/schema.sql` from this repository and run the script.
-4. This creates:
-   - `applications` table with `email TEXT UNIQUE NOT NULL`.
-   - Indexes for fast searches.
-   - Row Level Security (RLS) policies allowing anonymous applicants to submit (`INSERT`) while strictly preventing public viewing (`SELECT`) of other candidates' sensitive data.
-
----
-
 ## 🌐 Deployment to Vercel
 
 1. Push your project to GitHub.
@@ -112,9 +97,7 @@ npm run build
 3. Framework Preset: **Vite**.
 4. Build Command: `npm run build` (or `tsc -b && vite build`).
 5. Output Directory: `dist`.
-6. Add your Environment Variables in the Vercel dashboard:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
+6. (Optional) Add your EmailJS Environment Variables in the Vercel dashboard:
    - `VITE_EMAILJS_SERVICE_ID`
    - `VITE_EMAILJS_TEMPLATE_ID`
    - `VITE_EMAILJS_PUBLIC_KEY`

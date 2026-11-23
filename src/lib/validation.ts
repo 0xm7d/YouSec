@@ -73,22 +73,29 @@ export function validateStep1(data: ApplicationFormData): FormValidationErrors {
   return errors;
 }
 
+export function isMotivationRequired(level?: string): boolean {
+  return level === 'Intermediate' || level === 'Advanced';
+}
+
 export function validateStep2(data: ApplicationFormData): FormValidationErrors {
   const errors: FormValidationErrors = {};
   const mot = cleanString(data.motivation, FIELD_LIMITS.motivationMax);
   const prob = cleanString(data.problemSolvingApproach, FIELD_LIMITS.problemSolvingMax);
   const goals = cleanString(data.learningGoals, FIELD_LIMITS.learningGoalsMax);
+  const required = isMotivationRequired(data.experienceLevel);
 
-  if (mot.length < FIELD_LIMITS.motivationMin) {
-    errors.motivation = `Please tell us why you want to join (minimum ${FIELD_LIMITS.motivationMin} characters).`;
-  }
+  if (required) {
+    if (mot.length < FIELD_LIMITS.motivationMin) {
+      errors.motivation = `Please tell us why you want to join (minimum ${FIELD_LIMITS.motivationMin} characters for ${data.experienceLevel}).`;
+    }
 
-  if (prob.length < FIELD_LIMITS.problemSolvingMin) {
-    errors.problemSolvingApproach = `Please describe what you do when encountering a blocker (minimum ${FIELD_LIMITS.problemSolvingMin} characters).`;
-  }
+    if (prob.length < FIELD_LIMITS.problemSolvingMin) {
+      errors.problemSolvingApproach = `Please describe what you do when encountering a blocker (minimum ${FIELD_LIMITS.problemSolvingMin} characters for ${data.experienceLevel}).`;
+    }
 
-  if (goals.length < FIELD_LIMITS.learningGoalsMin) {
-    errors.learningGoals = `Please describe what you hope to learn or achieve (minimum ${FIELD_LIMITS.learningGoalsMin} characters).`;
+    if (goals.length < FIELD_LIMITS.learningGoalsMin) {
+      errors.learningGoals = `Please describe what you hope to learn or achieve (minimum ${FIELD_LIMITS.learningGoalsMin} characters for ${data.experienceLevel}).`;
+    }
   }
 
   if (data.contribution && data.contribution.length > FIELD_LIMITS.contributionMax) {

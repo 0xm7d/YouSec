@@ -26,7 +26,7 @@ import {
   validateStep2, 
   validateAll 
 } from '../../lib/validation';
-import { submitApplication } from '../../lib/supabase';
+import { submitApplication } from '../../lib/submissionService';
 import { AlertCircle, Check, Sparkles } from 'lucide-react';
 
 export const ApplicationForm: React.FC = () => {
