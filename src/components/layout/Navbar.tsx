@@ -34,11 +34,11 @@ export const Navbar: React.FC = () => {
           {/* Brand & Institutional identification */}
           <div className="flex items-center gap-3.5">
             <a href="#" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-yousec-accent/60 bg-white flex items-center justify-center p-0.5 group-hover:border-yousec-accent transition-all duration-300 shadow-glow-subtle group-hover:scale-105">
+              <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-yousec-accent/80 bg-black flex items-center justify-center group-hover:border-yousec-accent transition-all duration-300 shadow-glow-subtle group-hover:scale-105">
                 <img
                   src="/yousec-logo.png"
                   alt="YouSec Club Logo"
-                  className="w-full h-full object-contain rounded-full"
+                  className="w-full h-full object-cover scale-[1.36] rounded-full"
                 />
               </div>
               <div>
